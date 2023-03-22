@@ -19,7 +19,10 @@ app.use(express.urlencoded({extended: true}))
 //Routes
 app.use('/todo', todo)
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.json({
+    'status':'success',
+    'port':PORT
+  })
 })
 
 const start = async () => {
