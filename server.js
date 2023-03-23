@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const connectDB = require('./db/connect')
 const task = require('./routes/task')
 const member = require('./routes/member')
+const auth = require('./routes/auth')
 //Define
 const app = express()
 const cors = require('cors')
@@ -24,8 +25,10 @@ app.use(fileUpload({
 }));
 
 //Routes
+app.use('/auth', auth)
 app.use('/task', task)
 app.use('/member', member)
+
 app.get('/', (req, res) => {
   res.json({
     'status':'success',
