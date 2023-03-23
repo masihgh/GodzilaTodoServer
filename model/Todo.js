@@ -1,22 +1,17 @@
 const mongoose = require("mongoose");
 
 const TodoSchema = new mongoose.Schema({
-  title: {
+  task: {
     type: String,
     required: true,
   },
-  body: {
+  AsignedUser: {
     type: String,
     required: true,
   },
   color: {
     type: String,
     required: false,
-  },
-  isBookmark: {
-    type: Boolean,
-    required: false,
-    default: false,
   },
   isDone: {
     type: Boolean,
