@@ -4,17 +4,17 @@ const MemberSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
     },
     github: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
     },
     linkedin: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
     },
     age: {
         type: Number,
