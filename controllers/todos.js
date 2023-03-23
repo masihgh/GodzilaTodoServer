@@ -1,51 +1,51 @@
-const Todo = require('../model/Todo')
+const Task = require('../model/Task')
 
-const getAllTodos = async (req, res) => {
+const getAllTasks = async (req, res) => {
     try {
-        const Todos = await Todo.find({})
-        res.status(200).json(Todos)
+        const Tasks = await Task.find({})
+        res.status(200).json(Tasks)
     } catch (error) {
         res.status(500).json({msg: error})
     }
 }
 
-const getTodo = async (req, res) => {
+const getTask = async (req, res) => {
     try {
 	  const { id } = req.params;
-	  const todo = await Todo.findById(id);
-	  return res.status(200).json(todo);
+	  const Task = await Task.findById(id);
+	  return res.status(200).json(Task);
     } catch (error) {
         res.status(500).json({msg: error})
     }
 }
 
-const createTodo = async (req, res) => {
+const createTask = async (req, res) => {
     try {
-	  const newTodo = new Todo({ ...req.body });
-	  const insertedTodo = await newTodo.save();
-	  return res.status(201).json(insertedTodo);
+	  const newTask = new Task({ ...req.body });
+	  const insertedTask = await newTask.save();
+	  return res.status(201).json(insertedTask);
 	  
     } catch (error) {
       res.status(500).json({ msg: error });
     }
 };
 
-const updateTodo = async (req, res) => {
+const updateTask = async (req, res) => {
     const {id: _id} = req.params
-    const todo = req.body
+    const Task = req.body
     
     try {
-        const updatedTodo = await Todo.findByIdAndUpdate(_id, {...todo, _id}, {new: true})
-        res.status(200).json(updatedTodo)
+        const updatedTask = await Task.findByIdAndUpdate(_id, {...Task, _id}, {new: true})
+        res.status(200).json(updatedTask)
     } catch (error) {
         res.status(500).json({ msg: error });
     }
 }
 
-const deleteTodo = async (req, res) => {
-    const { id: TodoID } = req.params;
+const deleteTask = async (req, res) => {
+    const { id: TaskID } = req.params;
     try {
-      await Todo.findOneAndDelete({ _id: TodoID });
+      await Task.findOneAndDelete({ _id: TaskID });
   
       res.status(200).json({delete:true});
     } catch (error) {
@@ -55,9 +55,9 @@ const deleteTodo = async (req, res) => {
   };
 
 module.exports = {
-    getAllTodos,
-    getTodo,
-    createTodo,
-    updateTodo,
-    deleteTodo
+    getAllTasks,
+    getTask,
+    createTask,
+    updateTask,
+    deleteTask
 }
