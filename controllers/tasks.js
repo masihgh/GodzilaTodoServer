@@ -12,8 +12,8 @@ const getAllTasks = async (req, res) => {
 const getTask = async (req, res) => {
     try {
 	  const { id } = req.params;
-	  const Task = await Task.findById(id);
-	  return res.status(200).json(Task);
+	  const task = await Task.findById(id);
+	  return res.status(200).json(task);
     } catch (error) {
         res.status(500).json({msg: error})
     }

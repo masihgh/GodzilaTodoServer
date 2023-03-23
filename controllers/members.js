@@ -51,7 +51,6 @@ const createMember = async (req, res) => {
     )
     try {
         const newMember = new Member({ ...obj });
-        console.log(req.body);
         const insertedMember = await newMember.save();
         return res.status(201).json(insertedMember);
 
