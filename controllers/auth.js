@@ -3,8 +3,8 @@ var bcrypt = require("bcrypt");
 var Member = require("../model/Member");
 
 exports.signin = (req, res) => {
-    Member.findOne({
-        email: req.body.email
+    const mem = Member.findOne({
+        name: req.body.name
     })
         .exec((err, member) => {
             if (err) {
@@ -41,14 +41,9 @@ exports.signin = (req, res) => {
                 expiresIn: 86400
             });
 
-            //responding to client request with member profile success message and  access token .
             res.status(200)
                 .send({
-                    member: {
-                        id: member._id,
-                        email: member.email,
-                        fullName: member.fullName,
-                    },
+                    member: mem,
                     message: "Login successfull",
                     accessToken: token,
                 });
