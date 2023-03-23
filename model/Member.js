@@ -6,6 +6,10 @@ const MemberSchema = new mongoose.Schema({
         required: [true, "name not provided"],
         unique: [true, "another user have this name, name is unique"]
     },
+    // password: {
+    //     type: String,
+    //     required: true
+    // },
     github: {
         type: String,
         required: [true, "github url not provided"],
@@ -35,10 +39,14 @@ const MemberSchema = new mongoose.Schema({
         default: [],
     },
     is_admin: {
-        type: Boolean,
+        type: String,
+        enum: ["normal", "admin"],
         required: false,
-        default: false,
     },
+    created: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model("Member", MemberSchema);
