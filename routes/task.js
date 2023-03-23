@@ -1,5 +1,3 @@
-
-
 const express = require('express')
 const {getAllTasks, getTask, createTask, updateTask, deleteTask}  = require('../controllers/tasks')
 // const Task = require('../model/Task')
