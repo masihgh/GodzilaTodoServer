@@ -27,6 +27,7 @@ app.use(fileUpload({
 //Routes
 app.use('/task', task)
 app.use('/member', member)
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   res.json({
