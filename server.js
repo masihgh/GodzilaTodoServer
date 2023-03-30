@@ -3,6 +3,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const connectDB = require('./db/connect')
 const task = require('./routes/task')
+const history =  require('./routes/history')
 const member = require('./routes/member')
 const authRoute = require('./routes/authRoute')
 const verifyUserToken = require('./middlewares/authJWT')
@@ -27,7 +28,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
 app.use('/auth', authRoute)
 app.use('/task',verifyUserToken, task)
-app.use('/member', member)
+app.use('/member',verifyUserToken, member)
+app.use('/history', history)
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
