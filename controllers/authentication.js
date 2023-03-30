@@ -33,6 +33,17 @@ const AuthUser = async (req, res) => {
         res.status(500).json({ msg: error })
     }
 }
+const Logout = async (req, res) => {
+    const authHeader = req.headers["authorization"];
+    jwt.sign(authHeader, "", { expiresIn: 1 }, (logout, err) => {
+        if (logout) {
+            res.send({ msg: 'You have been Logged Out' });
+        } else {
+            res.send({ msg: 'Error' });
+        }
+    });
+}
+
 module.exports = {
-    login,AuthUser
+    login, AuthUser, Logout
 }
