@@ -4,7 +4,8 @@ const dotenv = require('dotenv')
 const connectDB = require('./db/connect')
 const task = require('./routes/task')
 const member = require('./routes/member')
-
+const authRoute = require('./routes/authRoute')
+const verifyUserToken = require('./middlewares/authJWT')
 //Define
 const app = express()
 const cors = require('cors')
@@ -17,15 +18,15 @@ const fileUpload = require('express-fileupload');
 dotenv.config()
 
 //Middlewares
-app.use(cors())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload({
   createParentPath: true,
 }));
-
+app.use(cors())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
-app.use('/task', task)
+app.use('/auth', authRoute)
+app.use('/task',verifyUserToken, task)
 app.use('/member', member)
 app.use(express.static('public'))
 

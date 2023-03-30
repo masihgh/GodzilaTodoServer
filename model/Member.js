@@ -42,6 +42,7 @@ const MemberSchema = new mongoose.Schema({
     is_admin: {
         type: String,
         enum: ["normal", "admin"],
+        default: 'normal',
         required: false,
     },
     created: {
