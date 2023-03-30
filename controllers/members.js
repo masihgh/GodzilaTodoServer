@@ -51,8 +51,8 @@ const createMember = async (req, res) => {
     )
     try {
         const newMember = new Member({ ...obj });
-        console.log(req.body);
         const insertedMember = await newMember.save();
+        createHistory(req.user.id,'Member', [insertedMember.id,insertedMember.name], 'Create')
         return res.status(201).json(insertedMember);
 
     } catch (error) {
@@ -93,6 +93,7 @@ const updateMember = async (req, res) => {
     
     try {
         const updatedMember = await Member.findByIdAndUpdate(_id, { ...obj, _id }, { new: true })
+        createHistory(req.user.id,'Member', [updatedMember.id,updatedMember.name], 'Update')
         res.status(200).json(updatedMember)
 
     } catch (error) {
@@ -110,8 +111,8 @@ const updateMember = async (req, res) => {
 const deleteMember = async (req, res) => {
     const { id: MemberID } = req.params;
     try {
-        await Member.findOneAndDelete({ _id: MemberID });
-
+        const member = await Member.findOneAndDelete({ _id: MemberID });
+        createHistory(req.user.id,'Member', [member.id,member.name], 'Update')
         res.status(200).json({ delete: true });
     } catch (error) {
         console.log(error);

@@ -9,20 +9,19 @@ const getAllHistories = async (req, res) => {
     }
 }
 
-const createHistory = async (user,action, payload, type) => {
+const createHistory = (user,action, payload, type) => {
     try {
-        const History = {
+        const history = {
             action: action,
             payload: payload,
             type: type,
             user: user
         }
-        const newHistory = new History(History);
-        const insertedHistory = await newHistory.save();
-        return true;
+        const newHistory = new History(history);
+        const insertedHistory = newHistory.save();
 
     } catch (error) {
-        return false;
+        console.log(error);
     }
 };
 
