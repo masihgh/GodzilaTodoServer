@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', authRoute)
 app.use('/task',verifyUserToken, task)
 app.use('/member',verifyUserToken, member)
-app.use('/history', history)
+app.use('/history',verifyUserToken, history)
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
