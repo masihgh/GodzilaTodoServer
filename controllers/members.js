@@ -36,7 +36,7 @@ const createMember = async (req, res) => {
         github: req.body.github,
         linkedin: req.body.linkedin,
         age: req.body.age,
-        skills: req.body.skills,
+        skills: [req.body.skills],
         avatar: fileNameFake + extensionName,
         desc: req.body.desc,
         is_admin: (req.user.user_is_admin == 'admin')? req.body.is_admin : 'normal' 
