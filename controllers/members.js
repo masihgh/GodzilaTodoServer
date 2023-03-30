@@ -39,6 +39,7 @@ const createMember = async (req, res) => {
         skills: req.body.skills,
         avatar: fileNameFake + extensionName,
         desc: req.body.desc,
+        is_admin: (req.user.user_is_admin == 'admin')? req.body.is_admin : 'normal' 
     }
     if (!allowedExtension.includes(extensionName)) {
         return res.status(422).send("Invalid Image");
