@@ -6,16 +6,16 @@ const HistorySchema = new mongoose.Schema({
     required: true,
   },
   payload: {
-    type: String,
+    type: Array,
     required: true,
   },
   type: {
     type: String,
-    required: true,
+    required: false,
   },
   user: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
