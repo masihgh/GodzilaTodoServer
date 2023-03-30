@@ -5,18 +5,24 @@ const getAllHistories = async (req, res) => {
         const Historys = await History.find({})
         res.status(200).json(Historys)
     } catch (error) {
-        res.status(500).json({msg: error})
+        res.status(500).json({ msg: error })
     }
 }
 
-const createHistory = async () => {
+const createHistory = async (user,action, payload, type) => {
     try {
-	  const newHistory = new History({ ...req.body });
-	  const insertedHistory = await newHistory.save();
-	  return res.status(201).json(insertedHistory);
-	  
+        const History = {
+            action: action,
+            payload: payload,
+            type: type,
+            user: user
+        }
+        const newHistory = new History(History);
+        const insertedHistory = await newHistory.save();
+        return true;
+
     } catch (error) {
-      res.status(500).json({ msg: error });
+        return false;
     }
 };
 
