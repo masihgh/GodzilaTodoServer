@@ -25,46 +25,6 @@ const getMember = async (req, res) => {
 }
 
 const createMember = async (req, res) => {
-    let uploadFile = req.files.avatarPhoto
-    const fileName = uploadFile.name
-    const fileNameFake = uuidv4();
-    const extensionName = path.extname(fileName); // fetch the file extension
-    const allowedExtension = ['.png', '.jpg', '.jpeg'];
-
-    var obj = {
-        name: req.body.name,
-        github: req.body.github,
-        linkedin: req.body.linkedin,
-        age: req.body.age,
-        skills: [req.body.skills],
-        avatar: fileNameFake + extensionName,
-        desc: req.body.desc,
-        is_admin: (req.user.user_is_admin == 'admin')? req.body.is_admin : 'normal' 
-    }
-    if (!allowedExtension.includes(extensionName)) {
-        return res.status(422).send("Invalid Image");
-    }
-    uploadFile.mv(
-        `${__dirname}/../public/files/${fileNameFake}${extensionName}`,
-        function (err) {
-            if (err) {
-                return res.status(500).send(err)
-            }
-        },
-    )
-    try {
-        const newMember = new Member({ ...obj });
-        const insertedMember = await newMember.save();
-        createHistory(req.user.id,'Member', [insertedMember.id,insertedMember.name], 'Create')
-        return res.status(201).json(insertedMember);
-
-    } catch (error) {
-        fs.unlink(`${__dirname}/../public/files/${fileNameFake}${extensionName}`, (err) => {
-            // if (err) throw err;
-            // console.log('File deleted!');
-        });
-        res.status(500).json({ msg: error });
-    }
 
 };
 
