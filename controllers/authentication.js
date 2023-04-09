@@ -12,7 +12,7 @@ const login = async (req, res) => {
             let payload = { id: user._id, user_is_admin: user.is_admin };
             const token = jwt.sign(payload, process.env.TOKEN_SECRET);
 
-            res.status(200).header("auth-token", token).send({ "token": token });
+            res.status(200).header("auth-token", token).send({"user": user, "token": token });
         }
         else {
             res.status(401).json({ msg: 'invalid token or user dose not exsists' });

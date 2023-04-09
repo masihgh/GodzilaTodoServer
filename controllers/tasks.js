@@ -33,10 +33,10 @@ const createTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
     const {id: _id} = req.params
-    const Task = req.body
+    const task = req.body
     
     try {
-        const updatedTask = await Task.findByIdAndUpdate(_id, {...Task, _id}, {new: true})
+        const updatedTask = await Task.findByIdAndUpdate(_id, {...task, _id}, {new: true})
         createHistory(req.user.id,'Task', [updatedTask.id,updatedTask.task], 'Update')
         res.status(200).json(updatedTask)
     } catch (error) {

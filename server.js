@@ -27,8 +27,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
 app.use('/auth', authRoute)
-app.use('/task',verifyUserToken, task)
-app.use('/member',verifyUserToken, member)
+app.use('/task', task)
+app.use('/member', member)
 app.use('/history',verifyUserToken, history)
 app.use(express.static('public'))
 
