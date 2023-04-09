@@ -20,7 +20,9 @@ dotenv.config()
 //Middlewares
 app.use(cors())
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 //Routes
 app.use('/auth', authRoute)
 app.use('/task', task)
